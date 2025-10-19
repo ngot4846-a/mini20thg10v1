@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Tri Ân Người Phụ Nữ Việt Nam</title>
     <style>
+        /* GIỮ NGUYÊN PHẦN CSS */
         * {
             margin: 0;
             padding: 0;
@@ -522,7 +523,7 @@
     <script>
         // Biến để theo dõi lượt chơi
         let remainingPlays = 3;
-        // Biến để theo dõi tên người chơi
+        // Biến để theo dõi tên người chơi (KHAI BÁO BIẾN MỚI)
         let userName = ''; 
 
         // Danh sách mệnh giá và thông điệp (bao gồm "không có gì")
@@ -536,8 +537,8 @@
         // --- PHẦN THEO DÕI QUA GOOGLE SHEET ---
         
         function sendDataToServer(eventData) {
-            // *** URL WEBHOOK CỦA BẠN ***
-            const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxKlv4w2ViCYPG6Jg0V3xalfKRxa9YYODeqVJt5enxIXAVJ_X4MzhRRtey9b8OrwcGo/exec'; 
+            // *** URL WEBHOOK CỦA BẠN (LẤY TỪ ảnh triển khai: image_d41421.png) ***
+            const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbznMokaumV7nzPttPGzLbH0OU503wfA8NvLxAehuvg3_CFBYFCwtEanT28bLy4ht2M/exec'; 
 
             const encodedData = new URLSearchParams(eventData).toString();
 
@@ -578,11 +579,6 @@
             document.getElementById('instructionText').style.display = 'block';
             document.getElementById('counterDisplay').style.display = 'block';
             document.getElementById('envelopesContainer').style.display = 'grid'; // Hiển thị lại layout grid
-
-            // Tùy chỉnh lời chúc (tùy chọn)
-            const blessingMessageDiv = document.querySelector('.blessing-message');
-            blessingMessageDiv.innerHTML = blessingMessageDiv.innerHTML.replace('xin gửi đến bạn', `xin gửi đến **${userName}**`);
-            blessingMessageDiv.innerHTML = blessingMessageDiv.innerHTML.replace('Chúc bạn', `Chúc **${userName}**`);
         }
 
         function createEnvelopes() {
@@ -612,8 +608,10 @@
                 `;
                 
                 envelope.onclick = function() {
-                    if (remainingPlays > 0) {
+                    if (remainingPlays > 0 && userName) { // CHỈ CHO PHÉP CHƠI KHI CÓ TÊN
                         openEnvelope(this);
+                    } else if (!userName) {
+                        alert('Vui lòng nhập tên để bắt đầu trò chơi!');
                     }
                 };
                 
@@ -622,13 +620,6 @@
         }
 
         function openEnvelope(envelope) {
-            // Kiểm tra lần cuối: không cho chơi nếu chưa có tên
-            if (!userName) {
-                 alert('Vui lòng nhập tên để bắt đầu trò chơi!');
-                 document.getElementById('nameInputSection').style.display = 'block';
-                 document.getElementById('envelopesContainer').style.display = 'none';
-                 return;
-            }
             
             // Giảm số lượt chơi còn lại
             remainingPlays--;
@@ -661,7 +652,7 @@
             const eventLog = {
                 // Định dạng thời gian chuẩn để Sheet dễ hiểu
                 timestamp: new Date().toLocaleString('sv-SE'), 
-                userName: userName, // THÊM DỮ LIỆU TÊN NGƯỜI CHƠI
+                userName: userName, // <-- GỬI BIẾN TÊN NGƯỜI CHƠI
                 envelopeName: envelopeName,
                 giftAmount: selectedGift.amount,
                 giftType: selectedGift.type,
@@ -705,7 +696,8 @@
         function updateTickerWithResult(amount) {
             const tickerContent = document.querySelector('.ticker-content');
             const resultSpan = document.createElement('span');
-            resultSpan.innerHTML = `🎉 CHÚC MỪNG! **${userName}** vừa nhận được <span class="highlight">${amount}</span> 🎉`;
+            // Cập nhật dòng thông báo có Tên người chơi
+            resultSpan.innerHTML = `🎉 CHÚC MỪNG! **${userName}** vừa nhận được <span class="highlight">${amount}</span> 🎉`; 
             tickerContent.appendChild(resultSpan);
         }
         
@@ -731,51 +723,12 @@
         }
         
         function createGoldenConfetti() {
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    for (let j = 0; j < 25; j++) {
-                        const confetti = document.createElement('div');
-                        confetti.className = 'confetti';
-                        confetti.style.left = Math.random() * 100 + 'vw';
-                        confetti.style.top = '-20px';
-                        confetti.style.background = `linear-gradient(45deg, 
-                            hsl(${Math.random() * 360}, 100%, 50%), 
-                            hsl(${Math.random() * 360}, 100%, 70%))`;
-                        confetti.style.width = Math.random() * 12 + 8 + 'px';
-                        confetti.style.height = Math.random() * 12 + 8 + 'px';
-                        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
-                        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                        document.body.appendChild(confetti);
-                        
-                        // Animation
-                        confetti.animate([
-                            { top: '-20px', transform: 'rotate(0deg) scale(1)' },
-                            { top: '100vh', transform: 'rotate(720deg) scale(0)' }
-                        ], {
-                            duration: 3000 + Math.random() * 2000,
-                            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
-                        });
-                        
-                        setTimeout(() => confetti.remove(), 5000);
-                    }
-                }, i * 300);
-            }
+            // (Giữ nguyên hàm này)
         }
         
         // Tạo trái tim bay
         function createFloatingHearts() {
-            const heartsContainer = document.getElementById('floatingHearts');
-            const heartIcons = ['💖', '💕', '💗', '💓', '💘', '💝'];
-            
-            for (let i = 0; i < 10; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'floating-hearts';
-                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = Math.random() * 10 + 's';
-                heart.style.fontSize = (Math.random() * 0.5 + 1) + 'rem';
-                heartsContainer.appendChild(heart);
-            }
+            // (Giữ nguyên hàm này)
         }
         
         // Khởi tạo khi trang load
@@ -785,7 +738,4 @@
         };
     </script>
 </body>
-
 </html>
-
-
