@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tri Ân Người Phụ Nữ Việt Nam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 50%, #ffb6c1 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .news-ticker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #e74c3c, #ff6b6b, #e74c3c);
+            color: white;
+            padding: 12px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            z-index: 10000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+            padding-left: 100%;
+        }
+
+        .ticker-content span {
+            margin: 0 30px;
+            display: inline-block;
+        }
+
+        .highlight {
+            color: #FFD700;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        .luxury-card {
+            background: linear-gradient(145deg, #ffffff, #fff5f5);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 
+                0 20px 60px rgba(231, 76, 60, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .luxury-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ffd6e7, transparent 70%);
+            border-radius: 0 0 0 100px;
+        }
+        
+        .luxury-card:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, transparent, #ffd6e7 70%);
+            border-radius: 0 100px 0 0;
+            z-index: 0;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gold-text {
+            background: linear-gradient(45deg, #D4AF37, #FFD700, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #c0392b;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #e74c3c;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        /* CSS MỚI CHO PHẦN ĐIỀN TÊN */
+        .name-input-section {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .name-input-section input[type="text"] {
+            padding: 15px;
+            width: 80%;
+            max-width: 300px;
+            margin: 20px auto;
+            border: 2px solid #e74c3c;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .name-input-section input[type="text"]:focus {
+            border-color: #c0392b;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+            outline: none;
+        }
+        /* END CSS MỚI */
+        
+        .envelopes-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .luxury-envelope {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            width: 160px;
+            height: 110px;
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 25px rgba(231, 76, 60, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: float 4s ease-in-out infinite;
+            animation-delay: calc(var(--delay) * 0.2s);
+        }
+        
+        .luxury-envelope:before {
+            content: '';
+            position: absolute;
+            top: -45px;
+            left: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 45px solid #c0392b;
+            transition: all 0.4s ease;
+        }
+        
+        .luxury-envelope:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 160px;
+            height: 110px;
+            background: linear-gradient(145deg, #e74c3c, #d35400);
+            z-index: 1;
+            border-radius: 12px;
+        }
+        
+        .luxury-envelope:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 15px 35px rgba(231, 76, 60, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            animation-play-state: paused;
+        }
+        
+        .luxury-envelope.open {
+            transform: scale(1.1);
+            cursor: default;
+            animation: none;
+        }
+        
+        .luxury-envelope.open:before {
+            transform: rotate(180deg);
+            top: -25px;
+        }
+        
+        .luxury-envelope.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            animation: none;
+        }
+        
+        .envelope-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 600;
+            z-index: 2;
+            font-size: 0.9rem;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .result-section {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            display: none;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .money-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            animation: pulse 2s infinite;
+        }
+        
+        .amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .empty-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #FFD700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .congrats-message {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .blessing-message {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            font-style: italic;
+            line-height: 1.8;
+            backdrop-filter: blur(10px);
+        }
+        
+        .elegant-btn {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .elegant-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+        
+        .instruction {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .counter {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 1rem;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        
+        .floral-decoration {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floral-decoration.right {
+            left: auto;
+            right: 20px;
+            bottom: auto;
+            top: 20px;
+            animation-delay: 1s;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 14px;
+            height: 14px;
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: 1000;
+            border-radius: 50%;
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 999;
+            animation: floatHearts 8s linear infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .luxury-card {
+                padding: 30px 20px;
+                margin-top: 50px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .envelopes-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .luxury-envelope {
+                width: 140px;
+                height: 95px;
+            }
+            
+            .luxury-envelope:before {
+                top: -40px;
+                border-left: 70px solid transparent;
+                border-right: 70px solid transparent;
+                border-bottom: 40px solid #c0392b;
+            }
+            
+            .luxury-envelope:after {
+                width: 140px;
+                height: 95px;
+            }
+
+            .news-ticker {
+                font-size: 0.9rem;
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .news-ticker {
+                font-size: 0.8rem;
+            }
+            
+            .ticker-content span {
+                margin: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="news-ticker">
+        <div class="ticker-content">
+             <span>🎉 CHÚC MỪNG NGÀY PHỤ NỮ VIỆT NAM 20/10 🎉</span>
+             <span> Follow Instagram: tiens.033</span>
+             <span> QUÀ TẶNG RANDOM MAY MẮN </span>
+             <span>🎁 ĐẶC BIỆT:<span class="highlight">100.000 VNĐ</span> • <span class="highlight">200.000 VNĐ</span> • <span class="highlight">500.000 VNĐ</span></span>
+             <span>🌟 Chúc các chị em luôn xinh đẹp, hạnh phúc và thành công 🌟</span>
+             <span>💝 Mỗi phong bì chứa đựng một món quà bất ngờ 💝</span>
+             <span>🎊 Cơ hội nhận lì xì may mắn lên đến <span class="highlight">500.000 VNĐ</span> 🎊</span>
+        </div>
+    </div>
+    
+    <div id="floatingHearts"></div>
+    
+    <div class="luxury-card">
+        <div class="floral-decoration">🌸</div>
+        <div class="floral-decoration right">🌺</div>
+        
+        <div class="header">
+            <h1><span class="gold-text">CHÚC MỪNG NGÀY PHỤ NỮ VIỆT NAM</span></h1>
+            <div class="subtitle">GỬI NHỮNG ĐIỀU TỐT ĐẸP, NGỌT NGÀO NHẤT ĐẾN BẠN</div>
+        </div>
+        
+        <div class="name-input-section" id="nameInputSection">
+            <div class="subtitle" style="margin-bottom: 20px;">XIN MỜI NHẬP TÊN BẠN</div>
+            <input type="text" id="userNameInput" placeholder="Ví dụ: Hồng, Lan, ..." maxlength="30">
+            <button class="elegant-btn" onclick="startGame()">💌 Bắt đầu</button>
+        </div>
+        
+        <div class="instruction" id="instructionText" style="display: none;">
+            💝 Chọn một phong bì may mắn để nhận lời chúc và quà tặng đặc biệt
+        </div>
+        
+        <div class="counter" id="counterDisplay" style="display: none;">
+            Bạn còn <span id="remainingCount">3</span> lượt mở phong bì
+        </div>
+        
+        <div class="envelopes-section" id="envelopesContainer" style="display: none;">
+            </div>
+        
+        <div id="resultSection" class="result-section">
+            <div class="money-icon" id="moneyIcon">💐</div>
+            <div class="amount" id="amountDisplay">10.000 VNĐ</div>
+            <div class="empty-amount" id="emptyAmountDisplay" style="display: none;">KHÔNG CÓ GÌ</div>
+            <div class="congrats-message" id="congratsText">
+                Chúc mừng! Bạn đã nhận được món quà đặc biệt
+            </div>
+            <div class="blessing-message">
+                "Nhân ngày 20/10, xin gửi đến bạn những lời chúc tốt đẹp nhất.<br>
+                Chúc bạn luôn rạng rỡ, hạnh phúc và thành công trong cuộc sống.<br>
+                Dù bạn có mạnh mẽ đến đâu, cũng đừng quên dành thời gian yêu thương bản thân và tận hưởng những điều ngọt ngào nhất hôm nay và tương lai nha.."
+            </div>
+            <button class="elegant-btn" onclick="closeResult()">🎁 Tiếp tục</button>
+        </div>
+    </div>
+
+    <script>
+        // Biến để theo dõi lượt chơi
+        let remainingPlays = 3;
+        // Biến để theo dõi tên người chơi
+        let userName = ''; 
+
+        // Danh sách mệnh giá và thông điệp (bao gồm "không có gì")
+        const giftOptions = [
+            { amount: "5.000 VNĐ", message: "Lì xì nho nhỏ, tình cảm thật to!", type: "money" },
+            { amount: "10.000 VNĐ", message: "Món quà nhỏ, ý nghĩa lớn!", type: "money" },
+            { amount: "20.000 VNĐ", message: "Chúc mừng! Bạn thật may mắn!", type: "money" },
+            { amount: "KHÔNG CÓ GÌ", message: "Lời chúc ý nghĩa hơn tiền bạc!", type: "empty" }
+        ];
+
+        // --- PHẦN THEO DÕI QUA GOOGLE SHEET ---
+        
+        function sendDataToServer(eventData) {
+            // *** URL WEBHOOK CỦA BẠN ***
+            const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxbQktcOAuYLbwphaT4AlQ8Y9VJ-5PpCmDq6H79u5jLV1mvmxz3bA_rp8GWUn0zcuA3/exec'; 
+
+            const encodedData = new URLSearchParams(eventData).toString();
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: encodedData 
+            })
+            .then(response => {
+                console.log('Dữ liệu quà tặng đã được gửi thành công.');
+            })
+            .catch(error => {
+                console.error('Lỗi khi gửi dữ liệu:', error);
+            });
+        }
+        
+        // --- CÁC HÀM CHÍNH ---
+        
+        // HÀM MỚI: Xử lý nhập tên và bắt đầu trò chơi
+        function startGame() {
+            const inputElement = document.getElementById('userNameInput');
+            const name = inputElement.value.trim();
+
+            if (name.length < 2) {
+                alert('Vui lòng nhập tên của bạn (ít nhất 2 ký tự) để bắt đầu!');
+                inputElement.focus();
+                return;
+            }
+
+            userName = name;
+            
+            // Ẩn phần nhập tên
+            document.getElementById('nameInputSection').style.display = 'none';
+
+            // Hiện phần chơi game
+            document.getElementById('instructionText').style.display = 'block';
+            document.getElementById('counterDisplay').style.display = 'block';
+            document.getElementById('envelopesContainer').style.display = 'grid'; // Hiển thị lại layout grid
+
+            // Tùy chỉnh lời chúc (tùy chọn)
+            const blessingMessageDiv = document.querySelector('.blessing-message');
+            blessingMessageDiv.innerHTML = blessingMessageDiv.innerHTML.replace('xin gửi đến bạn', `xin gửi đến **${userName}**`);
+            blessingMessageDiv.innerHTML = blessingMessageDiv.innerHTML.replace('Chúc bạn', `Chúc **${userName}**`);
+        }
+
+        function createEnvelopes() {
+            const container = document.getElementById('envelopesContainer');
+            const envelopeCount = 9;
+            
+            const envelopeNames = [
+                "Xinh Đẹp, Rạng Ngời",
+                "Hạnh Phúc Trọn Vẹn", 
+                "Đỉnh Nóc",
+                "Kịch Trần",
+                "Bay Phấp Phới",
+                "Sức Khỏe Dồi Dào",
+                "Rực Cháy Với Ước Mơ",
+                "Tỏa Sáng Rạng Ngời",
+                "Sớm Có Người Yêu",
+            ];
+            
+            for (let i = 0; i < envelopeCount; i++) {
+                const envelope = document.createElement('div');
+                envelope.className = 'luxury-envelope';
+                envelope.style.setProperty('--delay', i);
+                envelope.innerHTML = `
+                    <div class="envelope-content">
+                        ✉️<br>${envelopeNames[i]}
+                    </div>
+                `;
+                
+                envelope.onclick = function() {
+                    if (remainingPlays > 0) {
+                        openEnvelope(this);
+                    }
+                };
+                
+                container.appendChild(envelope);
+            }
+        }
+
+        function openEnvelope(envelope) {
+            // Kiểm tra lần cuối: không cho chơi nếu chưa có tên
+            if (!userName) {
+                 alert('Vui lòng nhập tên để bắt đầu trò chơi!');
+                 document.getElementById('nameInputSection').style.display = 'block';
+                 document.getElementById('envelopesContainer').style.display = 'none';
+                 return;
+            }
+            
+            // Giảm số lượt chơi còn lại
+            remainingPlays--;
+            document.getElementById('remainingCount').textContent = remainingPlays;
+            
+            // Vô hiệu hóa tất cả phong bì
+            const allEnvelopes = document.querySelectorAll('.luxury-envelope');
+            allEnvelopes.forEach(env => {
+                env.classList.remove('floating');
+                env.style.cursor = 'default';
+                env.onclick = null;
+                env.style.opacity = '0.6';
+                env.style.transform = 'scale(0.9)';
+            });
+            
+            // Đánh dấu phong bì được chọn
+            envelope.classList.add('open');
+            envelope.style.opacity = '1';
+            envelope.style.transform = 'scale(1.1)';
+            
+            // Random mệnh giá
+            const randomIndex = Math.floor(Math.random() * giftOptions.length);
+            const selectedGift = giftOptions[randomIndex];
+            
+            // Lấy tên phong bì đã mở
+            const envelopeContentDiv = envelope.querySelector('.envelope-content');
+            const envelopeName = envelopeContentDiv ? envelopeContentDiv.textContent.replace('✉️\n', '').trim() : 'Unknown';
+
+            // GỬI DỮ LIỆU ĐẾN GOOGLE SHEET
+            const eventLog = {
+                // Định dạng thời gian chuẩn để Sheet dễ hiểu
+                timestamp: new Date().toLocaleString('sv-SE'), 
+                userName: userName, // THÊM DỮ LIỆU TÊN NGƯỜI CHƠI
+                envelopeName: envelopeName,
+                giftAmount: selectedGift.amount,
+                giftType: selectedGift.type,
+                remainingPlays: remainingPlays
+            };
+
+            sendDataToServer(eventLog); 
+
+            // Hiện kết quả sau 1.5 giây
+            setTimeout(() => {
+                // Hiển thị kết quả tùy theo loại
+                if (selectedGift.type === "money") {
+                    document.getElementById('amountDisplay').textContent = selectedGift.amount;
+                    document.getElementById('amountDisplay').style.display = 'block';
+                    document.getElementById('emptyAmountDisplay').style.display = 'none';
+                    document.getElementById('moneyIcon').textContent = '💰';
+                    createGoldenConfetti();
+                } else {
+                    document.getElementById('emptyAmountDisplay').textContent = selectedGift.amount;
+                    document.getElementById('emptyAmountDisplay').style.display = 'block';
+                    document.getElementById('amountDisplay').style.display = 'none';
+                    document.getElementById('moneyIcon').textContent = '💌';
+                }
+                
+                document.getElementById('congratsText').textContent = selectedGift.message;
+                document.getElementById('resultSection').style.display = 'block';
+                
+                // Cập nhật dòng thông báo với kết quả thực tế
+                updateTickerWithResult(selectedGift.amount);
+                
+                // Nếu đã hết lượt chơi, thông báo
+                if (remainingPlays === 0) {
+                    setTimeout(() => {
+                        alert(`**${userName}** đã hết lượt mở phong bì. Cảm ơn bạn đã tham gia!`);
+                    }, 1000);
+                }
+            }, 1500);
+        }
+        
+        // Hàm mới để cập nhật thông báo với kết quả thực
+        function updateTickerWithResult(amount) {
+            const tickerContent = document.querySelector('.ticker-content');
+            const resultSpan = document.createElement('span');
+            resultSpan.innerHTML = `🎉 CHÚC MỪNG! **${userName}** vừa nhận được <span class="highlight">${amount}</span> 🎉`;
+            tickerContent.appendChild(resultSpan);
+        }
+        
+        function closeResult() {
+            const resultSection = document.getElementById('resultSection');
+            resultSection.style.display = 'none';
+            
+            // Nếu còn lượt chơi, kích hoạt lại các phong bì
+            if (remainingPlays > 0) {
+                const allEnvelopes = document.querySelectorAll('.luxury-envelope');
+                allEnvelopes.forEach(env => {
+                    if (!env.classList.contains('open')) {
+                        env.style.opacity = '1';
+                        env.style.cursor = 'pointer';
+                        env.onclick = function() {
+                            if (remainingPlays > 0) {
+                                openEnvelope(this);
+                            }
+                        };
+                    }
+                });
+            }
+        }
+        
+        function createGoldenConfetti() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    for (let j = 0; j < 25; j++) {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        confetti.style.left = Math.random() * 100 + 'vw';
+                        confetti.style.top = '-20px';
+                        confetti.style.background = `linear-gradient(45deg, 
+                            hsl(${Math.random() * 360}, 100%, 50%), 
+                            hsl(${Math.random() * 360}, 100%, 70%))`;
+                        confetti.style.width = Math.random() * 12 + 8 + 'px';
+                        confetti.style.height = Math.random() * 12 + 8 + 'px';
+                        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+                        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        document.body.appendChild(confetti);
+                        
+                        // Animation
+                        confetti.animate([
+                            { top: '-20px', transform: 'rotate(0deg) scale(1)' },
+                            { top: '100vh', transform: 'rotate(720deg) scale(0)' }
+                        ], {
+                            duration: 3000 + Math.random() * 2000,
+                            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+                        });
+                        
+                        setTimeout(() => confetti.remove(), 5000);
+                    }
+                }, i * 300);
+            }
+        }
+        
+        // Tạo trái tim bay
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
+            const heartIcons = ['💖', '💕', '💗', '💓', '💘', '💝'];
+            
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-hearts';
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.fontSize = (Math.random() * 0.5 + 1) + 'rem';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Khởi tạo khi trang load
+        window.onload = function() {
+            createEnvelopes();
+            createFloatingHearts();
+        };
+    </script>
+</body>
+</html>
